@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sourabh Building Material - Wholesaler & Distributor</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS for animations and styling -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Animation for elements fading in on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.2s ease-out, transform 1s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hero background with parallax effect */
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.75)), url('https://images.unsplash.com/photo-1581141849291-1125c7b69c2d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Gradient text for headings */
+        .gradient-text {
+            background: linear-gradient(to right, #1D4ED8, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        /* Card hover effects */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        /* Process step styling with dashed connector */
+        .process-step {
+            position: relative;
+        }
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -3.5rem; /* Half of gap-28 */
+            transform: translateY(-50%);
+            width: 7rem; /* gap-28 */
+            height: 2px;
+            background-image: linear-gradient(to right, #93c5fd 50%, transparent 50%);
+            background-size: 12px 2px;
+            background-repeat: repeat-x;
+        }
+        @media (max-width: 1024px) {
+           .process-step:not(:last-child)::after {
+              display: none;
+           }
+        }
+        /* Typing animation for hero headline */
+        .typing-effect {
+            border-right: .15em solid #3B82F6; /* The typewriter cursor */
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3B82F6; }
+        }
+        /* Client logo grayscale effect */
+        .client-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-xl shadow-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.44L19.5 8.35V15.65L12 19.56L4.5 15.65V8.35L12 4.44ZM12 11.2L7 8.5V14L12 16.8L17 14V8.5L12 11.2Z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800 tracking-wider">Sourabh Building Material</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-10">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">About</a>
+                    <a href="#products" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Products</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Testimonials</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Contact</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <a href="#contact" class="hidden lg:inline-block bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md transform hover:scale-105">Get a Quote</a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 bg-white rounded-lg shadow-xl">
+                <a href="#home" class="block py-3 px-5 text-gray-700 hover:bg-blue-50 rounded-t-lg">Home</a>
+                <a href="#about" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">About</a>
+                <a href="#products" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">Products</a>
+                <a href="#testimonials" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">Testimonials</a>
+                <a href="#contact" class="block py-3 px-5 text-gray-700 hover:bg-blue-50 rounded-b-lg">Contact</a>
+                <a href="#contact" class="block mt-3 w-full text-center bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg min-h-screen flex items-center justify-start text-white pt-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl text-left">
+                    <h1 id="hero-headline" class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight min-h-[140px] md:min-h-[190px]"></h1>
+                    <p class="text-lg md:text-xl max-w-2xl mb-8 text-gray-300 reveal">Based in Behror, Alwar, we supply top-quality cement, paints, bricks, and more across Rajasthan. Partner with us for reliable delivery and superior products.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 reveal" style="transition-delay: 200ms;">
+                        <a href="#products" class="bg-blue-600 text-white text-center font-bold py-4 px-10 rounded-lg hover:bg-blue-500 transition duration-300 text-lg shadow-xl transform hover:scale-105 inline-block">View Our Products</a>
+                        <a href="#contact" class="bg-white/10 backdrop-blur-sm text-white text-center border border-white/50 font-bold py-4 px-10 rounded-lg hover:bg-white/20 transition duration-300 text-lg shadow-xl transform hover:scale-105 inline-block">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2 reveal">
+                        <img src="https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?q=80&w=1974&auto=format&fit=crop" alt="Warehouse with building materials" class="rounded-2xl shadow-xl w-full h-auto">
+                    </div>
+                    <div class="lg:w-1/2 reveal" style="transition-delay: 200ms;">
+                        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-6">The Backbone of Your Construction Projects</h2>
+                        <p class="text-gray-700 mb-5 leading-relaxed text-lg">**Sourabh Building Material** is a leading wholesaler and distributor based in Behror, Alwar. For over 7 years, we have been a trusted name in the local construction industry, providing a comprehensive range of high-quality materials.</p>
+                        <p class="text-gray-700 leading-relaxed">Our mission is simple: to be the most reliable source for your construction needs. We achieve this through strong partnerships with top brands, a commitment to on-time delivery, and a customer-first approach to business. We understand the importance of quality materials for the integrity and longevity of your projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Trusted By Section -->
+        <section id="trusted-by" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h3 class="text-center text-gray-500 font-semibold tracking-widest uppercase reveal">Trusted by leading brands</h3>
+                <div class="flex justify-center items-center flex-wrap gap-x-12 gap-y-8 mt-8 reveal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Ambuja_Cements_logo.svg/2560px-Ambuja_Cements_logo.svg.png" alt="Ambuja Cement Logo" class="h-9 client-logo" onerror="this.onerror=null; this.alt='Ambuja Cement'; this.src='https://placehold.co/120x36/cccccc/333333?text=Ambuja';">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/UltraTech_Cement_logo.svg/1200px-UltraTech_Cement_logo.svg.png" alt="Ultratech Cement Logo" class="h-9 client-logo" onerror="this.onerror=null; this.alt='Ultratech Cement'; this.src='https://placehold.co/120x36/cccccc/333333?text=Ultratech';">
+                    <img src="https://logowik.com/content/uploads/images/jk-cement-new3257.logowik.com.webp" alt="JK Cement Logo" class="h-12 client-logo" onerror="this.onerror=null; this.alt='JK Cement'; this.src='https://placehold.co/100x48/cccccc/333333?text=JK+Cement';">
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                     <h2 class="text-4xl md:text-5xl font-bold gradient-text">Our Product Range</h2>
+                    <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-lg">We supply a curated selection of essential building materials from trusted brands.</p>
+                    <div class="mt-6 w-28 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product Card 1: Cement -->
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal">
+                        <div class="mb-5 flex justify-center">
+                           <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
+                                <i class="fas fa-archive text-5xl text-gray-500"></i>
+                           </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-center mb-3">Branded Cement</h3>
+                        <p class="text-gray-600 text-center">Official distributors of leading brands like Ambuja, Ultratech, and JK Cement. We supply PPC, OPC, and specialized cement.</p>
+                    </div>
+                    <!-- Product Card 2: Paints & Distemper -->
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal" style="transition-delay: 150ms;">
+                        <div class="mb-5 flex justify-center">
+                           <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
+                                <i class="fas fa-fill-drip text-5xl text-blue-500"></i>
+                           </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-center mb-3">Paints & Distemper</h3>
+                        <p class="text-gray-600 text-center">A wide range of high-quality Acrylic Distemper and paints. Find the perfect finish for your interior and exterior walls.</p>
+                    </div>
+                    <!-- Product Card 3: Bricks & Blocks -->
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal" style="transition-delay: 300ms;">
+                        <div class="mb-5 flex justify-center">
+                           <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
+                                <i class="fas fa-cubes text-5xl text-red-500"></i>
+                           </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-center mb-3">Cement Bricks</h3>
+                        <p class="text-gray-600 text-center">Durable and uniformly shaped Cement Bricks for strong and reliable masonry work. Ideal for any construction project.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Process Section -->
+        <section class="py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text">Our Simple Process</h2>
+                    <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-lg">Getting the materials you need is easy and straightforward.</p>
+                    <div class="mt-6 w-28 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="flex flex-col lg:flex-row justify-center items-center gap-y-16 lg:gap-x-28">
+                    <!-- Step 1 -->
+                    <div class="process-step text-center flex flex-col items-center reveal">
+                        <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-blue-200 mb-4 transform group-hover:scale-110 transition-transform">
+                            <i class="fas fa-phone-volume text-5xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">1. Place Your Order</h3>
+                        <p class="text-gray-600 max-w-xs">Contact us with your material requirements and project details.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="process-step text-center flex flex-col items-center reveal" style="transition-delay: 200ms;">
+                        <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-blue-200 mb-4">
+                            <i class="fas fa-box-open text-5xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">2. We Dispatch</h3>
+                        <p class="text-gray-600 max-w-xs">We prepare and dispatch your order promptly from our warehouse.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="text-center flex flex-col items-center reveal" style="transition-delay: 400ms;">
+                        <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-blue-200 mb-4">
+                            <i class="fas fa-shipping-fast text-5xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">3. On-Site Delivery</h3>
+                        <p class="text-gray-600 max-w-xs">Our fleet ensures safe and timely delivery directly to your construction site.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text">What Our Clients Say</h2>
+                    <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-lg">Our reputation is built on reliability and customer satisfaction.</p>
+                    <div class="mt-6 w-28 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-100 p-8 rounded-xl shadow-md reveal card-hover">
+                        <i class="fas fa-quote-left text-blue-500 text-3xl mb-4"></i>
+                        <p class="text-gray-600 mb-6 italic">"SBM is our go-to for all material transport. Their trucks are always on time, which is critical for our tight project schedules. Highly recommend their professional service."</p>
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/3B82F6/FFFFFF?text=RK" alt="Avatar of R. Kumar">
+                            <div>
+                                <p class="font-bold text-gray-800">R. Kumar</p>
+                                <p class="text-sm text-gray-500">Project Manager, ABC Constructions</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Testimonial 2 -->
+                    <div class="bg-gray-100 p-8 rounded-xl shadow-md reveal card-hover" style="transition-delay: 200ms;">
+                        <i class="fas fa-quote-left text-blue-500 text-3xl mb-4"></i>
+                        <p class="text-gray-600 mb-6 italic">"The quality of cement from SBM has been consistently excellent. Their team is cooperative and always helps with last-minute requests. A truly reliable partner."</p>
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/10B981/FFFFFF?text=SP" alt="Avatar of S. Patel">
+                            <div>
+                                <p class="font-bold text-gray-800">S. Patel</p>
+                                <p class="text-sm text-gray-500">Owner, Patel Builders</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Testimonial 3 -->
+                    <div class="bg-gray-100 p-8 rounded-xl shadow-md reveal card-hover" style="transition-delay: 400ms;">
+                        <i class="fas fa-quote-left text-blue-500 text-3xl mb-4"></i>
+                        <p class="text-gray-600 mb-6 italic">"We've been using SBM for a year. Their handling is secure, deliveries are prompt, and their pricing is very competitive. Great service all around."</p>
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/F59E0B/FFFFFF?text=VG" alt="Avatar of V. Gupta">
+                            <div>
+                                <p class="font-bold text-gray-800">V. Gupta</p>
+                                <p class="text-sm text-gray-500">Civil Engineer, Apex Infra</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text">Contact Us</h2>
+                    <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-lg">Reach out for inquiries, price lists, or to place an order. Our team is ready to assist you.</p>
+                     <div class="mt-6 w-28 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="bg-white max-w-6xl mx-auto p-8 md:p-12 rounded-2xl shadow-lg flex flex-col lg:flex-row gap-10 items-center">
+                    <!-- Contact Form -->
+                    <div class="lg:w-3/5 w-full reveal">
+                         <h3 class="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                    <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" required>
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="+91 80057 67547" class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address (Optional)</label>
+                                <input type="email" id="email" name="email" placeholder="email@example.com" class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Inquiry / Material Requirement</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Please list the materials and quantities you require..." class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" required></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105">Submit Inquiry</button>
+                            </div>
+                        </form>
+                        <div id="form-feedback" class="mt-4"></div>
+                    </div>
+                    <!-- Contact Details -->
+                    <div class="lg:w-2/5 w-full reveal" style="transition-delay: 200ms;">
+                        <div class="bg-gradient-to-br from-gray-800 to-gray-900 text-white p-8 rounded-2xl shadow-2xl h-full flex flex-col">
+                            <h3 class="text-2xl font-bold mb-6">Contact Person</h3>
+                            <div class="flex items-center mb-6">
+                               <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-2xl font-bold mr-4">HY</div>
+                               <div>
+                                    <p class="text-xl font-bold">Harish Yadav</p>
+                                    <p class="text-blue-300">Proprietor</p>
+                               </div>
+                            </div>
+                            <div class="space-y-6 border-t border-gray-700 pt-6">
+                                <div class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-2xl mr-4 mt-1 text-blue-400"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-lg">Address</h4>
+                                        <p class="text-gray-300">Bus Stand Gunti, Behror,<br>Alwar, Rajasthan, 301701, India</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-phone-alt text-2xl mr-4 mt-1 text-blue-400"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-lg">Call Us</h4>
+                                        <a href="tel:+918005767547" class="hover:underline text-gray-300 text-lg font-semibold">+91 80057 67547</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-envelope text-2xl mr-4 mt-1 text-blue-400"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-lg">Email Us</h4>
+                                        <a href="mailto:info@sourabhmaterial.com" class="hover:underline text-gray-300">info@sourabhmaterial.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About SBM -->
+                <div class="col-span-1 lg:col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">Sourabh Building Material</h3>
+                    <p class="text-gray-400 pr-8">Your trusted wholesaler for timely and reliable delivery of construction materials in Behror, Alwar, and across Rajasthan. We are committed to fueling your projects with quality supplies and exceptional service.</p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition">Our Products</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-5">
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500">
+                <p>&copy; 2024 Sourabh Building Material. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuIcon = mobileMenuButton.querySelector('i');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenuIcon.classList.remove('fa-times');
+                    mobileMenuIcon.classList.add('fa-bars');
+                } else {
+                    mobileMenuIcon.classList.remove('fa-bars');
+                    mobileMenuIcon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            const navLinks = document.querySelectorAll('#mobile-menu a, #header nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                         mobileMenuIcon.classList.remove('fa-times');
+                         mobileMenuIcon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Header style on scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-lg');
+                    header.classList.remove('shadow-sm');
+                } else {
+                    header.classList.remove('shadow-lg');
+                    header.classList.add('shadow-sm');
+                }
+            });
+
+            // Scroll reveal animation
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Typing effect for Hero headline
+            const headline = document.getElementById('hero-headline');
+            const text = "Your Premier Building Material Wholesaler";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    headline.innerHTML = text.substring(0, i + 1) + '<span class="animate-ping">|</span>';
+                    i++;
+                    setTimeout(typeWriter, 80);
+                } else {
+                     headline.innerHTML = text; // Remove cursor when done
+                }
+            }
+            // Add a small delay before starting the animation
+            setTimeout(typeWriter, 500);
+
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            const formFeedback = document.getElementById('form-feedback');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                formFeedback.innerHTML = `
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg relative" role="alert">
+                        <p class="font-bold">Success!</p>
+                        <p>Your inquiry has been sent. We will get back to you shortly.</p>
+                    </div>
+                `;
+                contactForm.reset();
+
+                setTimeout(() => {
+                    formFeedback.innerHTML = '';
+                }, 6000);
+            });
+        });
+    </script>
+</body>
+</html>
