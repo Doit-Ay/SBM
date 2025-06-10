@@ -48,7 +48,7 @@
             background-clip: text;
             text-fill-color: transparent;
         }
-        /* Card hover effects */
+        /* Card hover/active effects */
         .card-hover {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
@@ -56,41 +56,40 @@
             transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
+        /* Tap feedback for mobile */
+        .interactive-element {
+            transition: transform 0.1s ease;
+        }
+        .interactive-element:active {
+            transform: scale(0.96);
+        }
         /* Process step styling with dashed connector */
         .process-step {
             position: relative;
         }
+        /* Horizontal connector for desktop */
         .process-step:not(:last-child)::after {
             content: '';
             position: absolute;
-            top: 50%;
-            right: -3.5rem; /* Half of gap-28 */
-            transform: translateY(-50%);
-            width: 7rem; /* gap-28 */
+            top: 4rem; /* Aligns with center of the icon */
+            left: calc(50% + 4rem);
+            width: calc(7rem - 8rem); /* gap - icon width */
             height: 2px;
             background-image: linear-gradient(to right, #93c5fd 50%, transparent 50%);
             background-size: 12px 2px;
             background-repeat: repeat-x;
         }
-        @media (max-width: 1024px) {
+        /* Vertical connector for mobile */
+        @media (max-width: 1023px) {
            .process-step:not(:last-child)::after {
-              display: none;
+              top: 8rem; /* Start from bottom of icon */
+              left: 50%;
+              transform: translateX(-50%);
+              width: 2px;
+              height: 4rem; /* gap-y-16 */
+              background-image: linear-gradient(to bottom, #93c5fd 50%, transparent 50%);
+              background-size: 2px 12px;
            }
-        }
-        /* Typing animation for hero headline */
-        .typing-effect {
-            border-right: .15em solid #3B82F6; /* The typewriter cursor */
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #3B82F6; }
         }
         /* Client logo grayscale effect */
         .client-logo {
@@ -103,6 +102,13 @@
             opacity: 1;
             transform: scale(1.1);
         }
+        /* Mobile Menu Overlay */
+        #mobile-menu-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -114,42 +120,58 @@
                 <!-- Logo -->
                 <a href="#" class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
-                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.44L19.5 8.35V15.65L12 19.56L4.5 15.65V8.35L12 4.44ZM12 11.2L7 8.5V14L12 16.8L17 14V8.5L12 11.2Z"/>
-                        </svg>
+                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.44L19.5 8.35V15.65L12 19.56L4.5 15.65V8.35L12 4.44ZM12 11.2L7 8.5V14L12 16.8L17 14V8.5L12 11.2Z"/></svg>
                     </div>
                     <span class="text-xl font-bold text-gray-800 tracking-wider">Sourabh Building Material</span>
                 </a>
                 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center space-x-10">
-                    <a href="#home" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Home</a>
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">About</a>
-                    <a href="#products" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Products</a>
-                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Testimonials</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300">Contact</a>
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300 interactive-element">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300 interactive-element">About</a>
+                    <a href="#products" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300 interactive-element">Products</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300 interactive-element">Testimonials</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-300 interactive-element">Contact</a>
                 </nav>
 
-                <!-- CTA Button -->
-                <a href="#contact" class="hidden lg:inline-block bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md transform hover:scale-105">Get a Quote</a>
+                <!-- Desktop CTA Button -->
+                <a href="#contact" class="hidden lg:inline-block bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md interactive-element">Get a Quote</a>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="lg:hidden text-gray-800 focus:outline-none">
+                <button id="mobile-menu-open-button" class="lg:hidden text-gray-800 focus:outline-none z-50">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 bg-white rounded-lg shadow-xl">
-                <a href="#home" class="block py-3 px-5 text-gray-700 hover:bg-blue-50 rounded-t-lg">Home</a>
-                <a href="#about" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">About</a>
-                <a href="#products" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">Products</a>
-                <a href="#testimonials" class="block py-3 px-5 text-gray-700 hover:bg-blue-50">Testimonials</a>
-                <a href="#contact" class="block py-3 px-5 text-gray-700 hover:bg-blue-50 rounded-b-lg">Contact</a>
-                <a href="#contact" class="block mt-3 w-full text-center bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Quote</a>
-            </div>
         </div>
     </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-container" class="lg:hidden">
+        <!-- Overlay -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
+        <!-- Menu Panel -->
+        <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transform translate-x-full">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-between items-center p-6 border-b">
+                    <span class="font-bold text-lg text-blue-700">Menu</span>
+                    <button id="mobile-menu-close-button" class="text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <nav class="flex-grow p-6 space-y-4">
+                    <a href="#home" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 rounded-lg text-lg interactive-element">Home</a>
+                    <a href="#about" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 rounded-lg text-lg interactive-element">About</a>
+                    <a href="#products" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 rounded-lg text-lg interactive-element">Products</a>
+                    <a href="#testimonials" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 rounded-lg text-lg interactive-element">Testimonials</a>
+                    <a href="#contact" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 rounded-lg text-lg interactive-element">Contact</a>
+                </nav>
+                <div class="p-6 border-t">
+                    <a href="#contact" class="w-full text-center bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300 interactive-element">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Main Content -->
     <main>
@@ -157,11 +179,11 @@
         <section id="home" class="hero-bg min-h-screen flex items-center justify-start text-white pt-20">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl text-left">
-                    <h1 id="hero-headline" class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight min-h-[140px] md:min-h-[190px]"></h1>
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight min-h-[140px] md:min-h-[190px]">Your Premier Building Material Wholesaler</h1>
                     <p class="text-lg md:text-xl max-w-2xl mb-8 text-gray-300 reveal">Based in Behror, Alwar, we supply top-quality cement, paints, bricks, and more across Rajasthan. Partner with us for reliable delivery and superior products.</p>
                     <div class="flex flex-col sm:flex-row gap-4 reveal" style="transition-delay: 200ms;">
-                        <a href="#products" class="bg-blue-600 text-white text-center font-bold py-4 px-10 rounded-lg hover:bg-blue-500 transition duration-300 text-lg shadow-xl transform hover:scale-105 inline-block">View Our Products</a>
-                        <a href="#contact" class="bg-white/10 backdrop-blur-sm text-white text-center border border-white/50 font-bold py-4 px-10 rounded-lg hover:bg-white/20 transition duration-300 text-lg shadow-xl transform hover:scale-105 inline-block">Contact Us</a>
+                        <a href="#products" class="bg-blue-600 text-white text-center font-bold py-4 px-10 rounded-lg hover:bg-blue-500 transition duration-300 text-lg shadow-xl interactive-element">View Our Products</a>
+                        <a href="#contact" class="bg-white/10 backdrop-blur-sm text-white text-center border border-white/50 font-bold py-4 px-10 rounded-lg hover:bg-white/20 transition duration-300 text-lg shadow-xl interactive-element">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -205,7 +227,7 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Product Card 1: Cement -->
-                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal">
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover interactive-element reveal">
                         <div class="mb-5 flex justify-center">
                            <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
                                 <i class="fas fa-archive text-5xl text-gray-500"></i>
@@ -215,7 +237,7 @@
                         <p class="text-gray-600 text-center">Official distributors of leading brands like Ambuja, Ultratech, and JK Cement. We supply PPC, OPC, and specialized cement.</p>
                     </div>
                     <!-- Product Card 2: Paints & Distemper -->
-                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal" style="transition-delay: 150ms;">
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover interactive-element reveal" style="transition-delay: 150ms;">
                         <div class="mb-5 flex justify-center">
                            <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
                                 <i class="fas fa-fill-drip text-5xl text-blue-500"></i>
@@ -225,7 +247,7 @@
                         <p class="text-gray-600 text-center">A wide range of high-quality Acrylic Distemper and paints. Find the perfect finish for your interior and exterior walls.</p>
                     </div>
                     <!-- Product Card 3: Bricks & Blocks -->
-                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover reveal" style="transition-delay: 300ms;">
+                    <div class="group bg-gray-50/70 p-8 rounded-2xl shadow-lg card-hover interactive-element reveal" style="transition-delay: 300ms;">
                         <div class="mb-5 flex justify-center">
                            <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
                                 <i class="fas fa-cubes text-5xl text-red-500"></i>
@@ -246,7 +268,7 @@
                     <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-lg">Getting the materials you need is easy and straightforward.</p>
                     <div class="mt-6 w-28 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
                 </div>
-                <div class="flex flex-col lg:flex-row justify-center items-center gap-y-16 lg:gap-x-28">
+                <div class="flex flex-col lg:flex-row justify-center items-start lg:items-center gap-y-16 lg:gap-x-28">
                     <!-- Step 1 -->
                     <div class="process-step text-center flex flex-col items-center reveal">
                         <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-blue-200 mb-4 transform group-hover:scale-110 transition-transform">
@@ -264,7 +286,7 @@
                         <p class="text-gray-600 max-w-xs">We prepare and dispatch your order promptly from our warehouse.</p>
                     </div>
                     <!-- Step 3 -->
-                    <div class="text-center flex flex-col items-center reveal" style="transition-delay: 400ms;">
+                    <div class="process-step text-center flex flex-col items-center reveal" style="transition-delay: 400ms;">
                         <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-blue-200 mb-4">
                             <i class="fas fa-shipping-fast text-5xl text-blue-600"></i>
                         </div>
@@ -357,7 +379,7 @@
                                 <textarea id="message" name="message" rows="5" placeholder="Please list the materials and quantities you require..." class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" required></textarea>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105">Submit Inquiry</button>
+                                <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg interactive-element">Submit Inquiry</button>
                             </div>
                         </form>
                         <div id="form-feedback" class="mt-4"></div>
@@ -442,46 +464,41 @@
     <!-- JavaScript for Interactivity -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuIcon = mobileMenuButton.querySelector('i');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    mobileMenuIcon.classList.remove('fa-times');
-                    mobileMenuIcon.classList.add('fa-bars');
-                } else {
-                    mobileMenuIcon.classList.remove('fa-bars');
-                    mobileMenuIcon.classList.add('fa-times');
-                }
-            });
+            // --- Mobile Menu Logic ---
+            const openButton = document.getElementById('mobile-menu-open-button');
+            const closeButton = document.getElementById('mobile-menu-close-button');
+            const menuOverlay = document.getElementById('mobile-menu-overlay');
+            const menuPanel = document.getElementById('mobile-menu');
+            const menuLinks = menuPanel.querySelectorAll('a');
 
-            // Close mobile menu when a link is clicked
-            const navLinks = document.querySelectorAll('#mobile-menu a, #header nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!mobileMenu.classList.contains('hidden')) {
-                         mobileMenu.classList.add('hidden');
-                         mobileMenuIcon.classList.remove('fa-times');
-                         mobileMenuIcon.classList.add('fa-bars');
-                    }
-                });
-            });
+            const openMenu = () => {
+                menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                menuPanel.classList.remove('translate-x-full');
+                document.body.classList.add('overflow-hidden'); // Prevent background scroll
+            };
 
-            // Header style on scroll
+            const closeMenu = () => {
+                menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+                menuPanel.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden'); // Allow background scroll
+            };
+
+            openButton.addEventListener('click', openMenu);
+            closeButton.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+            
+            // --- Header Style on Scroll ---
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     header.classList.add('shadow-lg');
-                    header.classList.remove('shadow-sm');
                 } else {
                     header.classList.remove('shadow-lg');
-                    header.classList.add('shadow-sm');
                 }
             });
 
-            // Scroll reveal animation
+            // --- Scroll Reveal Animation ---
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -491,47 +508,24 @@
                     }
                 });
             }, {
-                threshold: 0.05,
+                threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             });
+            revealElements.forEach(el => observer.observe(el));
 
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
-
-            // Typing effect for Hero headline
-            const headline = document.getElementById('hero-headline');
-            const text = "Your Premier Building Material Wholesaler";
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    headline.innerHTML = text.substring(0, i + 1) + '<span class="animate-ping">|</span>';
-                    i++;
-                    setTimeout(typeWriter, 80);
-                } else {
-                     headline.innerHTML = text; // Remove cursor when done
-                }
-            }
-            // Add a small delay before starting the animation
-            setTimeout(typeWriter, 500);
-
-            // Contact Form Submission
+            // --- Contact Form Submission ---
             const contactForm = document.getElementById('contactForm');
             const formFeedback = document.getElementById('form-feedback');
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
                 formFeedback.innerHTML = `
-                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg relative" role="alert">
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg" role="alert">
                         <p class="font-bold">Success!</p>
                         <p>Your inquiry has been sent. We will get back to you shortly.</p>
                     </div>
                 `;
                 contactForm.reset();
-
-                setTimeout(() => {
-                    formFeedback.innerHTML = '';
-                }, 6000);
+                setTimeout(() => { formFeedback.innerHTML = ''; }, 6000);
             });
         });
     </script>
